@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-ng-app="app">
+<html ng-app="app">
 <head lang="en">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.css">
@@ -52,7 +52,7 @@
             <h1>Group Results</h1>
             <div class="row">
                 <div class="col-xs-12" ng-if="!groups">Loading...</div>
-                <div class="col-sm-6" data-ng-repeat="group in groups">
+                <div class="col-sm-6" ng-repeat="group in groups">
                     <h2>
                         Group {{ group.letter }}
                     </h2>
@@ -60,18 +60,20 @@
                         <thead>
                         <tr>
                             <th></th>
-                            <th>GD</th>
-                            <th>Pts</th>
+                            <th title="Goal Differential">GD</th>
+                            <th title="Points">Pts</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr data-ng-repeat="team in group.teams">
                             <td>
-                                <div class="flag flag-{{ team.fifa_code }}"></div>
-                                {{ team.country }}
+                                <span class="flag flag-{{ team.flag_code }}"></span>
+                                <a ui-sref="teams({ code: team.fifa_code })">
+                                    {{ team.country }}
+                                </a>
                             </td>
-                            <td>{{ team.goal_differential }}</td>
-                            <td>{{ team.points }}</td>
+                            <td title="Goal Differential">{{ team.goal_differential }}</td>
+                            <td title="Points">{{ team.points }}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -84,11 +86,12 @@
     <div class="row teams">
         <div class="col-xs-12">
             <h1>Teams</h1>
-            <div data-ng-repeat="team in teams">
-                Country: {{ team.country }} |
-                Alt. Name: {{ team.alternate_name }} |
-                Fifa code: {{ team.fifa_code }} |
-                Group ID: {{ team.group_id }}
+            <div ng-if="!teams">Loading...</div>
+            <div ng-repeat="team in teams">
+                <h2>{{ team.country }}</h2>
+                <p ng-if="team.alternate_name"><strong>Alt. Name:</strong> {{ team.alternate_name }}</p>
+                <p><strong>Fifa code:</strong> {{ team.fifa_code }}</p>
+                <p><strong>Group ID:</strong> {{ team.group_id }}</p>
             </div>
         </div>
     </div>

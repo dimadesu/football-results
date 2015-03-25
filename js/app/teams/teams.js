@@ -4,7 +4,7 @@
     .config(function ($stateProvider) {
 
         $stateProvider.state('teams', {
-            url: '/teams',
+            url: '/teams/:code',
             controller: 'TeamsCtrl',
             templateUrl: 'teams.html'
         });

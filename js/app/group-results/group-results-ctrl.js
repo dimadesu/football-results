@@ -9,32 +9,32 @@
                 group = group.group;
                 group.teams = group.teams.map(function (team) {
                     team = team.team;
-                    team.fifa_code = team.fifa_code.slice(0,2).toLowerCase();
+                    team.flag_code = team.fifa_code.slice(0,2).toLowerCase();
                     // Fix for some flags
-                    switch (team.fifa_code) {
+                    switch (team.flag_code) {
                         case 'ge':
-                            team.fifa_code = 'de';
+                            team.flag_code = 'de';
                             break;
                         case 'en':
-                            team.fifa_code = 'england';
+                            team.flag_code = 'england';
                             break;
                         case 'po':
-                            team.fifa_code = 'pt';
+                            team.flag_code = 'pt';
                             break;
                         case 'ko':
-                            team.fifa_code = 'kr';
+                            team.flag_code = 'kr';
                             break;
                         case 'ur':
-                            team.fifa_code = 'uy';
+                            team.flag_code = 'uy';
                             break;
                         case 'su':
-                            team.fifa_code = 'ch';
+                            team.flag_code = 'ch';
                             break;
                         case 'ho':
-                            team.fifa_code = 'hn';
+                            team.flag_code = 'hn';
                             break;
                         case 'ch':
-                            team.fifa_code = 'cl';
+                            team.flag_code = 'cl';
                             break;
                     }
                     return team;
