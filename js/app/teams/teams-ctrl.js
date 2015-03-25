@@ -1,6 +1,6 @@
-(function () {
+(function (angular) {
 
-    angular.module('app')
+    angular.module('app.teams')
     .controller('TeamsCtrl', function ($scope, $http) {
 
         $http.get('http://worldcup.sfg.io/teams/')
@@ -12,4 +12,4 @@
 
     });
 
-})();
+})(window.angular);

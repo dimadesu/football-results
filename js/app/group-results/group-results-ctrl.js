@@ -1,6 +1,5 @@
-(function () {
 
-    angular.module('app')
+    angular.module('app.group-results')
     .controller('GroupResultsCtrl', function ($scope, $http) {
 
         $http.get('http://worldcup.sfg.io/teams/group_results')
@@ -48,4 +47,3 @@
 
     });
 
-})();
