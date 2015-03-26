@@ -94,6 +94,10 @@
                     console.error(error);
                 });
 
+            $scope.isLinkDisplayed = function () {
+                return $stateParams.groupId === '';
+            };
+
         }]);
 
 })(window.angular);

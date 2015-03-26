@@ -18,6 +18,10 @@
                     console.error(error);
                 });
 
+            $scope.isLinkDisplayed = function () {
+                return $stateParams.code === '';
+            };
+
         }]);
 
 })(window.angular);
