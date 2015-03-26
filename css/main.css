@@ -2,3 +2,8 @@
     display: inline-block;
     background-image: url(../img/flags.png);
 }
+
+.goal-diff,
+.points {
+    width: 25%;
+}

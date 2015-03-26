@@ -24,12 +24,17 @@
             <ul class="nav navbar-nav">
                 <li ui-sref-active="active"><a ui-sref="group-results">Group Results</a></li>
                 <li ui-sref-active="active"><a ui-sref="teams">Teams</a></li>
+                <li ui-sref-active="active"><a ui-sref="team-results">Team Results</a></li>
             </ul>
             <form class="navbar-form navbar-right" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input
+                        ng-model="search.country"
+                        type="text"
+                        class="form-control"
+                        placeholder="Filter by country name"/>
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <!--<button type="submit" class="btn btn-default">Submit</button>-->
             </form>
         </div>
     </div>
@@ -60,15 +65,15 @@
                         <thead>
                         <tr>
                             <th></th>
-                            <th title="Goal Differential">GD</th>
-                            <th title="Points">Pts</th>
+                            <th class="goal-diff" title="Goal Differential">GD</th>
+                            <th class="points" title="Points">Pts</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr data-ng-repeat="team in group.teams">
+                        <tr data-ng-repeat="team in group.teams | filter:search">
                             <td>
                                 <span class="flag flag-{{ team.flag_code }}"></span>
-                                <a ui-sref="teams({ code: team.fifa_code })">
+                                <a ui-sref="team-results({ code: team.fifa_code })">
                                     {{ team.country }}
                                 </a>
                             </td>
@@ -87,11 +92,33 @@
         <div class="col-xs-12">
             <h1>Teams</h1>
             <div ng-if="!teams">Loading...</div>
-            <div ng-repeat="team in teams">
+            <div ng-repeat="team in teams | filter:search">
                 <h2>{{ team.country }}</h2>
                 <p ng-if="team.alternate_name"><strong>Alt. Name:</strong> {{ team.alternate_name }}</p>
                 <p><strong>Fifa code:</strong> {{ team.fifa_code }}</p>
                 <p><strong>Group ID:</strong> {{ team.group_id }}</p>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="team-results.html">
+    <div class="row team-results">
+        <div class="col-xs-12">
+            <h1>Team Results</h1>
+            <div ng-if="!teamResults">Loading...</div>
+            <div ng-repeat="teamResult in teamResults | filter:search">
+                <h2>{{ teamResult.country }}</h2>
+                <p ng-if="team.alternate_name"><strong>Alt. Name:</strong> {{ teamResult.alternate_name }}</p>
+                <p><strong>Fifa code:</strong> {{ teamResult.fifa_code }}</p>
+                <p><strong>Group ID:</strong> {{ teamResult.group_id }}</p>
+                <p><strong>Group Letter:</strong> {{ teamResult.group_letter }}</p>
+                <p><strong>Wins:</strong> {{ teamResult.wins }}</p>
+                <p><strong>Draws:</strong> {{ teamResult.draws }}</p>
+                <p><strong>Games Played:</strong> {{ teamResult.games_played }}</p>
+                <p><strong>Points:</strong> {{ teamResult.points }}</p>
+                <p><strong>Goals For:</strong> {{ teamResult.goals_for }}</p>
+                <p><strong>Goals Against:</strong> {{ teamResult.goals_against }}</p>
+                <p><strong>Goal Differential:</strong> {{ teamResult.goal_differential }}</p>
             </div>
         </div>
     </div>
@@ -102,5 +129,7 @@
 <script src="js/app/group-results/group-results-ctrl.js"></script>
 <script src="js/app/teams/teams.js"></script>
 <script src="js/app/teams/teams-ctrl.js"></script>
+<script src="js/app/team-results/team-results.js"></script>
+<script src="js/app/team-results/team-results-ctrl.js"></script>
 </body>
 </html>
