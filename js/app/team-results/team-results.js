@@ -1,5 +1,7 @@
 (function (angular) {
 
+    'use strict';
+
     angular.module('app.team-results', [])
     .config(function ($stateProvider) {
 

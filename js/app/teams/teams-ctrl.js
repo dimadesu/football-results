@@ -1,5 +1,7 @@
 (function (angular) {
 
+    'use strict';
+
     angular.module('app.teams')
     .controller('TeamsCtrl', function ($scope, $http, $stateParams) {
 

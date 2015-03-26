@@ -1,5 +1,7 @@
 (function (angular) {
 
+    'use strict';
+
     angular.module('app.group-results', [])
     .config(function ($stateProvider) {
 
