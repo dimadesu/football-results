@@ -3,23 +3,36 @@
     'use strict';
 
     angular.module('app.teams')
-        .controller('TeamsCtrl', ['$scope', 'Restangular', '$stateParams', function ($scope, Restangular, $stateParams) {
+        .controller('TeamsCtrl', ['$scope', 'Restangular', '$stateParams', 'TeamsModel', '$q',
+            function ($scope, Restangular, $stateParams, TeamsModel, $q) {
 
-            Restangular.all('teams').getList()
-                .then(function (resp) {
+                var deferred = $q.defer();
+
+                if (TeamsModel.data === undefined) {
+                    Restangular.all('teams').getList()
+                        .then(function (resp) {
+                            TeamsModel.init(resp.data);
+                            deferred.resolve();
+                        });
+                } else {
+                    deferred.resolve();
+                }
+
+                deferred.promise.then(function(){
                     if ($stateParams.code) {
-                        $scope.teams = resp.data.filter(function (item) {
+                        $scope.teams = TeamsModel.data.filter(function (item) {
                             return $stateParams.code === item.fifa_code;
                         });
                     } else {
-                        $scope.teams = resp.data;
+                        $scope.teams = TeamsModel.data;
                     }
                 });
 
-            $scope.isLinkDisplayed = function () {
-                return $stateParams.code === '';
-            };
+                $scope.isLinkDisplayed = function () {
+                    return $stateParams.code === '';
+                };
 
-        }]);
+            }
+        ]);
 
 })(window.angular);

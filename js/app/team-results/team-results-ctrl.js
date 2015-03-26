@@ -11,18 +11,14 @@
                 if (TeamResultsModel.data === undefined) {
                     Restangular.all('teams').all('results').getList()
                         .then(function (resp) {
-
                             TeamResultsModel.init(resp.data);
-
                             deferred.resolve();
-
                         });
                 } else {
                     deferred.resolve();
                 }
 
                 deferred.promise.then(function(){
-
                     if ($stateParams.code) {
                         $scope.teamResults = TeamResultsModel.data.filter(function (item) {
                             return $stateParams.code === item.fifa_code;
@@ -30,7 +26,6 @@
                     } else {
                         $scope.teamResults = TeamResultsModel.data;
                     }
-
                 });
 
                 $scope.isLinkDisplayed = function () {
