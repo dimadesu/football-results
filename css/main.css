@@ -1,3 +1,7 @@
+body {
+    padding-top: 80px;
+}
+
 .flag {
     display: inline-block;
     background-image: url(../img/flags.png);

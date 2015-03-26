@@ -38,7 +38,13 @@
         </div>
     </div>
 </nav>
-<div class="container" ui-view>
+<div class="container">
+    <div class="row" ng-controller="AlertsCtrl">
+        <div class="col-xs-12" ng-if="alerts.length">
+            <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+        </div>
+    </div>
+    <ui-view></ui-view>
 </div>
 <footer>
     <div class="container">
@@ -130,7 +136,10 @@
 <script src="js/vendors/angular-ui-router.js"></script>
 <script src="js/vendors/d3.js"></script>
 <script src="js/vendors/angular-charts.js"></script>
+<script src="js/vendors/ui-bootstrap-tpls-0.12.1.js"></script>
 <script src="js/app/app.js"></script>
+<script src="js/app/alerts/alerts.js"></script>
+<script src="js/app/alerts/alerts-ctrl.js"></script>
 <script src="js/app/group-results/group-results.js"></script>
 <script src="js/app/group-results/group-results-ctrl.js"></script>
 <script src="js/app/teams/teams.js"></script>
