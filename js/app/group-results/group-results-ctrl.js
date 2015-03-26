@@ -3,9 +3,9 @@
     'use strict';
 
     angular.module('app.group-results')
-        .controller('GroupResultsCtrl', function ($scope, $http, $stateParams) {
+        .controller('GroupResultsCtrl', function ($scope, Restangular, $stateParams) {
 
-            $http.get('http://worldcup.sfg.io/teams/group_results')
+            Restangular.all('teams').all('group_results').getList()
                 .then(function (resp) {
 
                     var data = resp.data;
