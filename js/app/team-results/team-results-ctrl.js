@@ -14,8 +14,6 @@
                     } else {
                         $scope.teamResults = resp.data;
                     }
-                }, function (error) {
-                    console.error(error);
                 });
 
             $scope.isLinkDisplayed = function () {

@@ -10,12 +10,25 @@
 
                     var data = resp.data;
 
-                    // Data format simplification
+                    if ($stateParams.groupId) {
+                        data = data.filter(function (item) {
+                            return parseInt($stateParams.groupId, 10) === item.group.id;
+                        });
+                    }
+
                     data = data.map(function (group) {
+
+                        var chartData = [];
+
                         group = group.group;
+
                         group.teams = group.teams.map(function (team) {
+
                             team = team.team;
+
+                            // Create flag code
                             team.flag_code = team.fifa_code.slice(0,2).toLowerCase();
+
                             // Fix for some flags
                             switch (team.flag_code) {
                                 case 'ge':
@@ -43,19 +56,15 @@
                                     team.flag_code = 'cl';
                                     break;
                             }
-                            return team;
-                        });
-                        return group;
-                    });
 
-                    data = data.map(function(group){
-                        var chartData = [];
-
-                        group.teams.forEach(function(team){
+                            // Chart data
                             chartData.push({
                                 x: team.country,
                                 y: [team.points]
                             });
+
+                            return team;
+
                         });
 
                         group.chart = {
@@ -80,18 +89,11 @@
                         };
 
                         return group;
+
                     });
 
-                    if ($stateParams.groupId) {
-                        $scope.groups = data.filter(function (item) {
-                            return parseInt($stateParams.groupId, 10) === item.id;
-                        });
-                    } else {
-                        $scope.groups = data;
-                    }
+                    $scope.groups = data;
 
-                }, function (error) {
-                    console.error(error);
                 });
 
             $scope.isLinkDisplayed = function () {
