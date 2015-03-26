@@ -22,7 +22,7 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li ui-sref-active="active"><a ui-sref="group-results">Group Results</a></li>
+                <li ui-sref-active="active"><a ui-sref="group-results({ groupId: '' })">Group Results</a></li>
                 <li ui-sref-active="active"><a ui-sref="teams">Teams</a></li>
                 <li ui-sref-active="active"><a ui-sref="team-results">Team Results</a></li>
             </ul>
@@ -59,7 +59,9 @@
                 <div class="col-xs-12" ng-if="!groups">Loading...</div>
                 <div class="col-sm-6" ng-repeat="group in groups">
                     <h2>
-                        Group {{ group.letter }}
+                        <a ui-sref="group-results({ groupId: group.id })">
+                            Group {{ group.letter }}
+                        </a>
                     </h2>
                     <table class="table table-striped">
                         <thead>
