@@ -3,7 +3,7 @@
     'use strict';
 
     angular.module('app.group-results', [])
-    .config(function ($stateProvider) {
+    .config(['$stateProvider', function ($stateProvider) {
 
         $stateProvider.state('group-results', {
             url: '/group-results/:groupId',
@@ -11,6 +11,6 @@
             templateUrl: 'group-results.html'
         });
 
-    });
+    }]);
 
 })(window.angular);

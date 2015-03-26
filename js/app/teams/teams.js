@@ -3,7 +3,7 @@
     'use strict';
 
     angular.module('app.teams', [])
-    .config(function ($stateProvider) {
+    .config(['$stateProvider', function ($stateProvider) {
 
         $stateProvider.state('teams', {
             url: '/teams/:code',
@@ -11,6 +11,6 @@
             templateUrl: 'teams.html'
         });
 
-    });
+    }]);
 
 })(window.angular);
