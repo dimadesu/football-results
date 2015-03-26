@@ -12,30 +12,32 @@
         'app.group-results',
         'app.teams',
         'app.team-results'
-    ]).config(function ($urlRouterProvider, RestangularProvider, $provide, $httpProvider) {
+    ]).config(['$urlRouterProvider', 'RestangularProvider', '$provide', '$httpProvider',
+        function ($urlRouterProvider, RestangularProvider, $provide, $httpProvider) {
 
-        // Handle unmatched url
-        $urlRouterProvider.otherwise("/group-results/");
+            // Handle unmatched url
+            $urlRouterProvider.otherwise("/group-results/");
 
-        RestangularProvider.setBaseUrl('http://worldcup.sfg.io');
-        RestangularProvider.setFullResponse(true);
+            RestangularProvider.setBaseUrl('http://worldcup.sfg.io');
+            RestangularProvider.setFullResponse(true);
 
-        $provide.factory('httpInterceptor', function ($q) {
-            var interceptor = {
-                response: function (response) {
-                    return response || $q.when(response);
-                },
-                responseError: function (rejection) {
-                    interceptor.errors.push('Cannot load ' + rejection.config.url);
-                    return $q.reject(rejection);
-                },
-                errors: []
-            };
-            return interceptor;
-        });
+            $provide.factory('httpInterceptor', function ($q) {
+                var interceptor = {
+                    response: function (response) {
+                        return response || $q.when(response);
+                    },
+                    responseError: function (rejection) {
+                        interceptor.errors.push('Cannot load ' + rejection.config.url);
+                        return $q.reject(rejection);
+                    },
+                    errors: []
+                };
+                return interceptor;
+            });
 
-        $httpProvider.interceptors.push('httpInterceptor');
+            $httpProvider.interceptors.push('httpInterceptor');
 
-    });
+        }
+    ]);
 
 })(window.angular);

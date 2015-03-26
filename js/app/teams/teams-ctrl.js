@@ -3,7 +3,7 @@
     'use strict';
 
     angular.module('app.teams')
-        .controller('TeamsCtrl', function ($scope, Restangular, $stateParams) {
+        .controller('TeamsCtrl', ['$scope', 'Restangular', '$stateParams', function ($scope, Restangular, $stateParams) {
 
             Restangular.all('teams').getList()
                 .then(function (resp) {
@@ -18,6 +18,6 @@
                     console.error(error);
                 });
 
-        });
+        }]);
 
 })(window.angular);

@@ -3,7 +3,7 @@
     'use strict';
 
     angular.module('app.group-results')
-        .controller('GroupResultsCtrl', function ($scope, Restangular, $stateParams) {
+        .controller('GroupResultsCtrl', ['$scope', 'Restangular', '$stateParams', function ($scope, Restangular, $stateParams) {
 
             Restangular.all('teams').all('group_results').getList()
                 .then(function (resp) {
@@ -94,6 +94,6 @@
                     console.error(error);
                 });
 
-        });
+        }]);
 
 })(window.angular);

@@ -3,7 +3,7 @@
     'use strict';
 
     angular.module('app.alerts')
-        .controller('AlertsCtrl', function ($scope, httpInterceptor) {
+        .controller('AlertsCtrl', ['$scope', 'httpInterceptor', function ($scope, httpInterceptor) {
 
             $scope.$watch(function(){
                 return httpInterceptor.errors.length;
@@ -23,6 +23,6 @@
                 $scope.alerts.splice(index, 1);
             };
 
-        });
+        }]);
 
 })(window.angular);
